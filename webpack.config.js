@@ -24,6 +24,14 @@ module.exports = {
             // what files do we want to run this loader on. run babel on files that end with .js that are not in the node_modules folder
             test: /\.js$/,
             exclude: /node_modules/
+        }, { // set up css for webpack. test css and scss files. s? is optional
+            test: /\.s?css$/,
+            // use allows you to provide an array of loaders
+            use: [
+                'style-loader',
+                'css-loader',
+                'sass-loader'
+            ]
         }]
     },
     // sourcemap to easily locate errors . many different sourcemaps information on webpack.js.org/devtool.
