@@ -11,9 +11,28 @@ class Counter extends React.Component {
         this.resetCount = this.resetCount.bind(this);
         // set up default state value
         this.state = { 
-            count: props.count
+            count: 0
         };
 
+    }
+
+    // LIFECYCLE METHODS
+    componentDidMount() {
+        // get the string value out of localStroage
+        const stringCount = localStorage.getItem('count');
+        // parse the string into an int value. first value is string, second value is base 10
+        const count = parseInt(stringCount, 10 );
+        // prevention to make sure value is actually a number. will return true if it is not a number so must flip it using !
+        if(!isNaN(count)) {
+            this.setState(() => ({ count: count }));
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.count !== this.state.count) {
+            // localStorage.setItem returns a string value
+            localStorage.setItem('count', this.state.count);
+        }
     }
 
     // create three methods to handle button clicks
@@ -58,11 +77,11 @@ class Counter extends React.Component {
     }
 }
 
-// COUNTER DEFAULT PROPS
-Counter.defaultProps = {
-    // default count value
-    count: 0
-}
+// // COUNTER DEFAULT PROPS
+// Counter.defaultProps = {
+//     // default count value
+//     count: 0
+// }
 
 
 

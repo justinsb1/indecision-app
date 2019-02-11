@@ -1,0 +1,7 @@
+// allow you to take all arguments passed through command line and pass them through here
+{
+    "presets": [
+        "env",
+        "react"
+    ]
+}
